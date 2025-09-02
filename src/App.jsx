@@ -1,4 +1,5 @@
 // src/App.jsx
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import NavBar from './components/NavBar/NavBar';
@@ -7,15 +8,18 @@ import MailboxForm from './components/MailboxForm/MailboxForm';
 import MailboxDetails from './components/MailboxDetails/MailboxDetails';
 
 const App = () => {
+  // Initialize state for mailboxes
+  const [mailboxes, setMailboxes] = useState([]);
+
   return (
     <BrowserRouter>
       <NavBar />
       <main>
         <Routes>
           <Route path="/" element={<h1>Post Office</h1>} />
-          <Route path="/mailboxes" element={<MailboxList />} />
+          <Route path="/mailboxes" element={<MailboxList mailboxes={mailboxes} />} />
           <Route path="/new-mailbox" element={<MailboxForm />} />
-          <Route path="/mailboxes/:mailboxId" element={<MailboxDetails />} />
+          <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailboxes} />} />
         </Routes>
       </main>
     </BrowserRouter>
